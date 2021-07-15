@@ -33,12 +33,14 @@ const Top = () => {
 
         <ButtonToolbar className="ws-nowrap">
           <AskFcmBtnModal />
-          {isAdmin && <EditRoomBtnDrawer />}
+          {/*{isAdmin && <EditRoomBtnDrawer />}*/}
+          <EditRoomBtnDrawer />
         </ButtonToolbar>
       </div>
 
       <div className="d-flex justify-content-between align-items-center">
-        {isAdmin && <SendFcmBtnModal />}
+        {/*{isAdmin && <SendFcmBtnModal />}*/}
+        <SendFcmBtnModal />
         <RoomInfoBtnModal />
       </div>
     </div>
