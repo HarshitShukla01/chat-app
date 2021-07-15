@@ -28,6 +28,7 @@ const Messages = () => {
   }, [chatId]);
 
   const handleAdmin = useCallback(async (uid) => {
+    
       const adminsRef = database.ref(`/rooms/${chatId}/admins`);
       let alertMsg;
 
