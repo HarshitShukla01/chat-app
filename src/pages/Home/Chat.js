@@ -11,7 +11,6 @@ import { auth } from '../../misc/firebase';
 
 const Chat = () => {
   const { chatId } = useParams();
-
   const rooms = useRooms();
 
   useEffect(() => {
@@ -28,12 +27,12 @@ const Chat = () => {
     return <h6 className="text-center mt-page">Chat {chatId} not found</h6>;
   }
 
- const {name,description} = currentRoom;
-
-  const currentRoomData = {
-    name,
-    description
-  };
+  const { name, description } = currentRoom;
+  const admins = transformToArr(currentRoom.admins);
+  const fcmUsers = transformToArr(currentRoom.fcmUsers);
+  const isAdmin = admins.includes(auth.currentUser.uid);
+  const isReceivingFcm = fcmUsers.includes(auth.currentUser.uid);
+  const currentRoomData = {name,description,admins,isAdmin,isReceivingFcm};
 
   return (
     <CurrentRoomProvider data={currentRoomData}>

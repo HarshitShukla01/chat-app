@@ -18,7 +18,6 @@ const INITIAL_FORM = {
 
 const CreateRoomBtnModal = () => {
   const { isOpen, open, close } = useModalState();
-
   const [formValue, setFormValue] = useState(INITIAL_FORM);
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef();
@@ -37,17 +36,12 @@ const CreateRoomBtnModal = () => {
     const newRoomdata = {
       ...formValue,
       createdAt: firebase.database.ServerValue.TIMESTAMP,
-      admins: {
-        [auth.currentUser.uid]: true,
-      },
-      fcmUsers: {
-        [auth.currentUser.uid]: true,
-      },
+      admins: {[auth.currentUser.uid]: true,},
+      fcmUsers: {[auth.currentUser.uid]: true,},
     };
 
     try {
       await database.ref('rooms').push(newRoomdata);
-
       Alert.info(`${formValue.name} has been created`, 4000);
 
       setIsLoading(false);
