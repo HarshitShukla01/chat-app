@@ -48,6 +48,34 @@ const Messages = () => {
 
       Alert.info(alertMsg, 4000);
   },[chatId]);
+  
+  const handleLike = useCallback(async msgId => {
+    const { uid } = auth.currentUser;
+    const messageRef = database.ref(`/messages/${msgId}`);
+
+    let alertMsg;
+
+    await messageRef.transaction(msg => {
+      if (msg) {
+        if (msg.likes && msg.likes[uid]) {
+          msg.likeCount -= 1;
+          msg.likes[uid] = null;
+          alertMsg = 'Like removed';
+        } else {
+          msg.likeCount += 1;
+
+          if (!msg.likes) {msg.likes = {};}
+
+          msg.likes[uid] = true;
+          alertMsg = 'Like added';
+        }
+      }
+
+      return msg;
+    });
+
+    Alert.info(alertMsg, 4000);
+  }, []);
 
   return (
      <ul className="msg-list custom-scroll">
@@ -57,6 +85,7 @@ const Messages = () => {
         key={msg.id} 
         message={msg}
         handleAdmin={handleAdmin}
+        handleLike={handleLike}
         />
       )}
     </ul>
