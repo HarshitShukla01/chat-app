@@ -30,7 +30,7 @@ const Chat = () => {
   const { name, description } = currentRoom;
   const admins = transformToArr(currentRoom.admins);
   const isAdmin = admins.includes(auth.currentUser.uid);
-  const currentRoomData = {name,description,admins,isAdmin,isReceivingFcm};
+  const currentRoomData = {name,description,admins,isAdmin};
 
   return (
     <CurrentRoomProvider data={currentRoomData}>
