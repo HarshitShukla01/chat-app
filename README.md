@@ -1,4 +1,4 @@
-# **GROUP CHAT Website**   
+# **GROUP CHAT WEBSITE**   
 ### -> A Website for those you want to meet to new people.
 Link to Website : https://chat-web-app-4d673.web.app/signin
 
